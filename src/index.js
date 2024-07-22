@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import { GameStatistics } from './lib/game-statistics.js'
-import { alphabetize } from './lib/alphabetize.js'
 import { listify } from './lib/listify.js'
 import { formatTitle } from './lib/format-title.js'
 
@@ -17,7 +16,7 @@ function generateMatchReport(game) {
 
   let report = formatTitle(gameId)
   report += `Total kills: ${gameData.total_kills}\n`
-  report += `Players: ${listify(alphabetize(gameData.players))}\n`
+  report += `Players: ${listify(gameData.players)}\n`
 
   report += 'Kills:\n'
 

@@ -4,7 +4,6 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { GameStatistics } from '../../src/lib/game-statistics.js'
 
-
 const fixture = [
   {
     game_1: {
@@ -17,7 +16,7 @@ const fixture = [
   {
     game_2: {
       total_kills: 15,
-      players: ['Isgalamido', 'Dono da Bola', 'Mocinha', 'Zeh'],
+      players: ['Dono da Bola', 'Isgalamido', 'Mocinha', 'Zeh'],
       kills: { Isgalamido: -4, Zeh: -2, 'Dono da Bola': -1 },
       kills_by_means: {
         MOD_TRIGGER_HURT: 9,
@@ -30,7 +29,7 @@ const fixture = [
   {
     game_3: {
       total_kills: 105,
-      players: ['Dono da Bola', 'Isgalamido', 'Zeh', 'Assasinu Credi'],
+      players: ['Assasinu Credi', 'Dono da Bola', 'Isgalamido', 'Zeh'],
       kills: {
         Isgalamido: 19,
         'Dono da Bola': 13,
@@ -51,7 +50,7 @@ const fixture = [
   {
     game_4: {
       total_kills: 14,
-      players: ['Dono da Bola', 'Isgalamido', 'Zeh', 'Assasinu Credi'],
+      players: ['Assasinu Credi', 'Dono da Bola', 'Isgalamido', 'Zeh'],
       kills: { Isgalamido: 2, 'Assasinu Credi': 1, Zeh: 1 },
       kills_by_means: {
         MOD_ROCKET: 4,
@@ -65,15 +64,15 @@ const fixture = [
     game_5: {
       total_kills: 29,
       players: [
-        'Fasano Agai',
-        'Oootsimo',
-        'Isgalamido',
-        'Zeh',
-        'Dono da Bola',
-        'UnnamedPlayer',
-        'Maluquinho',
         'Assasinu Credi',
+        'Dono da Bola',
+        'Fasano Agai',
+        'Isgalamido',
         'Mal',
+        'Maluquinho',
+        'Oootsimo',
+        'UnnamedPlayer',
+        'Zeh',
       ],
       kills: {
         Oootsimo: 8,
@@ -98,14 +97,14 @@ const fixture = [
     game_6: {
       total_kills: 130,
       players: [
-        'Oootsimo',
-        'Isgalamido',
-        'Zeh',
-        'Dono da Bola',
-        'Mal',
         'Assasinu Credi',
-        'Chessus!',
         'Chessus',
+        'Chessus!',
+        'Dono da Bola',
+        'Isgalamido',
+        'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Zeh: 9,
@@ -130,12 +129,12 @@ const fixture = [
     game_7: {
       total_kills: 89,
       players: [
-        'Oootsimo',
-        'Isgalamido',
-        'Zeh',
-        'Dono da Bola',
-        'Mal',
         'Assasinu Credi',
+        'Dono da Bola',
+        'Isgalamido',
+        'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Oootsimo: 16,
@@ -160,14 +159,14 @@ const fixture = [
     game_8: {
       total_kills: 67,
       players: [
-        'Oootsimo',
-        'Isgalamido',
-        'Zeh',
-        'Dono da Bola',
-        'Mal',
         'Assasinu Credi',
-        'Chessus!',
         'Chessus',
+        'Chessus!',
+        'Dono da Bola',
+        'Isgalamido',
+        'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         'Assasinu Credi': 10,
@@ -193,13 +192,13 @@ const fixture = [
     game_9: {
       total_kills: 60,
       players: [
-        'Oootsimo',
-        'Dono da Bola',
-        'Zeh',
-        'Chessus',
-        'Mal',
         'Assasinu Credi',
+        'Chessus',
+        'Dono da Bola',
         'Isgalamido',
+        'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Mal: 1,
@@ -227,14 +226,14 @@ const fixture = [
     game_10: {
       total_kills: 20,
       players: [
+        'Assasinu Credi',
+        'Chessus',
         'Dono da Bola',
         'Isgalamido',
-        'Zeh',
-        'Oootsimo',
-        'Chessus',
-        'Assasinu Credi',
-        'UnnamedPlayer',
         'Mal',
+        'Oootsimo',
+        'UnnamedPlayer',
+        'Zeh',
       ],
       kills: {
         'Dono da Bola': -2,
@@ -256,13 +255,13 @@ const fixture = [
     game_11: {
       total_kills: 160,
       players: [
-        'Isgalamido',
-        'Dono da Bola',
-        'Zeh',
-        'Oootsimo',
-        'Chessus',
         'Assasinu Credi',
+        'Chessus',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         'Dono da Bola': 3,
@@ -289,13 +288,13 @@ const fixture = [
     game_12: {
       total_kills: 6,
       players: [
-        'Isgalamido',
-        'Dono da Bola',
-        'Zeh',
-        'Oootsimo',
-        'Chessus',
         'Assasinu Credi',
+        'Chessus',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: { Isgalamido: -1, Oootsimo: 2, 'Dono da Bola': -1, Zeh: 2 },
       kills_by_means: {
@@ -311,13 +310,13 @@ const fixture = [
     game_13: {
       total_kills: 122,
       players: [
-        'Isgalamido',
-        'Dono da Bola',
-        'Zeh',
-        'Oootsimo',
-        'Chessus',
         'Assasinu Credi',
+        'Chessus',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Isgalamido: 22,
@@ -344,12 +343,12 @@ const fixture = [
     game_14: {
       total_kills: 3,
       players: [
-        'Zeh',
         'Assasinu Credi',
         'Dono da Bola',
         'Fasano Agai',
         'Isgalamido',
         'Oootsimo',
+        'Zeh',
       ],
       kills: { Zeh: -3 },
       kills_by_means: { MOD_TRIGGER_HURT: 3 },
@@ -359,10 +358,10 @@ const fixture = [
     game_15: {
       total_kills: 0,
       players: [
-        'Dono da Bola',
-        'Oootsimo',
-        'Isgalamido',
         'Assasinu Credi',
+        'Dono da Bola',
+        'Isgalamido',
+        'Oootsimo',
         'Zeh',
       ],
       kills: {},
@@ -373,13 +372,13 @@ const fixture = [
     game_16: {
       total_kills: 13,
       players: [
-        'Dono da Bola',
-        'Oootsimo',
-        'Isgalamido',
         'Assasinu Credi',
-        'Zeh',
-        'UnnamedPlayer',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'UnnamedPlayer',
+        'Zeh',
       ],
       kills: {
         'Dono da Bola': -2,
@@ -401,12 +400,12 @@ const fixture = [
     game_17: {
       total_kills: 7,
       players: [
-        'Dono da Bola',
-        'Oootsimo',
-        'Isgalamido',
         'Assasinu Credi',
-        'Zeh',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Zeh: 2,
@@ -427,12 +426,12 @@ const fixture = [
     game_18: {
       total_kills: 95,
       players: [
-        'Isgalamido',
-        'Oootsimo',
-        'Dono da Bola',
         'Assasinu Credi',
-        'Zeh',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         Mal: 2,
@@ -457,12 +456,12 @@ const fixture = [
     game_19: {
       total_kills: 3,
       players: [
-        'Isgalamido',
-        'Oootsimo',
-        'Dono da Bola',
         'Assasinu Credi',
-        'Zeh',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: { 'Dono da Bola': 2, Oootsimo: 1 },
       kills_by_means: { MOD_ROCKET_SPLASH: 2, MOD_ROCKET: 1 },
@@ -472,12 +471,12 @@ const fixture = [
     game_20: {
       total_kills: 131,
       players: [
-        'Isgalamido',
-        'Oootsimo',
-        'Dono da Bola',
         'Assasinu Credi',
-        'Zeh',
+        'Dono da Bola',
+        'Isgalamido',
         'Mal',
+        'Oootsimo',
+        'Zeh',
       ],
       kills: {
         'Dono da Bola': 14,

@@ -1,6 +1,8 @@
 import readline from 'node:readline'
 import fs from 'node:fs'
 import { Readable } from 'node:stream'
+import { alphabetize } from './alphabetize.js'
+import { sortObject } from './sort-object.js'
 
 export class GameStatistics extends Readable {
   /**
@@ -29,9 +31,9 @@ export class GameStatistics extends Readable {
     if (line.includes('ShutdownGame')) {
       this._addGame({
         total_kills: this.totalKills,
-        players: this.players,
-        kills: this.kills,
-        kills_by_means: this.killsByMeans,
+        players: alphabetize(this.players),
+        kills: sortObject(this.kills),
+        kills_by_means: sortObject(this.killsByMeans),
       })
 
       this._resetVariables()
