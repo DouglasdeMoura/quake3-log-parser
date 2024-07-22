@@ -5,15 +5,10 @@
   "type": "module",
   "scripts": {
     "start": "node --env-file=.env src/index.js",
-    "test": "node --test ./tests/**/*.test.*",
-    "db:migrate": "node --env-file=.env src/database/migrate.js",
-    "db:seed": "node --env-file=.env src/database/seed.js"
+    "test": "node --test ./tests/**/*.test.*"
   },
   "keywords": [],
   "author": "Douglas Moura <douglas.ademoura@gmail.com>",
   "license": "MIT",
-  "description": "",
-  "dependencies": {
-    "better-sqlite3": "^11.1.2"
-  }
+  "description": ""
 }
