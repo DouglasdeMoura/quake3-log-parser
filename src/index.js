@@ -56,12 +56,8 @@ rl.on('line', async (line) => {
 rl.on('close', () => {
   const data = {}
   games.forEach((game, index) => {
-    data['game_' + (index + 1)] = {
-      total_kills: game.total_kills,
-      players: game.players,
-      kills: game.kills,
-      kills_by_means: game.kills_by_means,
-    }
+    const id = `game_${index + 1}`
+    data[id] = game
   })
   console.log(data)
 })
