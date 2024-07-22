@@ -34,6 +34,7 @@ rl.on('line', async (line) => {
     })
 
     resetVariables()
+    return
   }
 
   if (line.includes('ClientUserinfoChanged')) {
@@ -42,6 +43,7 @@ rl.on('line', async (line) => {
     if (!players.includes(player)) {
       players.push(player)
     }
+    return
   }
 
   if (line.includes('Kill')) {
@@ -58,6 +60,7 @@ rl.on('line', async (line) => {
     }
 
     killsByMeans[means.trim()] = (killsByMeans[means.trim()] || 0) + 1
+    return
   }
 })
 
