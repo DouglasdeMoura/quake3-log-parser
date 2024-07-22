@@ -1,8 +1,8 @@
 import readline from 'node:readline'
 import fs from 'node:fs'
-import { EventEmitter } from 'node:events'
+import { Readable } from 'node:stream'
 
-export class GameStatistics extends EventEmitter {
+export class GameStatistics extends Readable {
   /**
    * @param {string} logFilePath
    */
@@ -18,6 +18,7 @@ export class GameStatistics extends EventEmitter {
     this._processLine = this._processLine.bind(this)
     this._addGame = this._addGame.bind(this)
     this._resetVariables = this._resetVariables.bind(this)
+    this.processLog = this.processLog.bind(this)
   }
 
   _processLine(line) {
@@ -79,6 +80,8 @@ export class GameStatistics extends EventEmitter {
 
   _addGame(game) {
     this._games.push(game)
+    const gameData = JSON.stringify({ [`game_${this._games.length}`]: game }, null, 2)
+    this.push(gameData + '\n')
     this.emit('gameAdded', this.games[`game_${this._games.length}`])
   }
 
@@ -89,24 +92,27 @@ export class GameStatistics extends EventEmitter {
     this.killsByMeans = {}
   }
 
+  _read() {
+    // We're manually pushing data, so we don't need to do anything here
+  }
+
   processLog() {
-    return new Promise((resolve, reject) => {
-      const logStream = fs.createReadStream(this.logFilePath)
-      const rl = readline.createInterface({
-        input: logStream,
-        crlfDelay: Infinity
-      })
-
-      rl.on('line', this._processLine)
-
-      rl.on('close', () => {
-        this.emit('processingComplete', this.games)
-        resolve(this.games)
-      })
-
-      logStream.on('error', (error) => {
-        reject(error)
-      })
+    const logStream = fs.createReadStream(this.logFilePath)
+    const rl = readline.createInterface({
+      input: logStream,
+      crlfDelay: Infinity
     })
+
+    rl.on('line', this._processLine)
+
+    rl.on('close', () => {
+      this.push(null) // Signal the end of the stream
+    })
+
+    logStream.on('error', (error) => {
+      this.emit('error', error)
+    })
+
+    return this // Return this so we can pipe it
   }
 }
