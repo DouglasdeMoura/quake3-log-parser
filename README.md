@@ -95,7 +95,7 @@ This will process the log file located at `src/database/qgames.txt`, generate a 
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/91eexxafmShEevrSBl2puE9Tj.svg)](https://asciinema.org/a/91eexxafmShEevrSBl2puE9Tj)
+[![asciicast](./docs/demo.svg)](https://asciinema.org/a/91eexxafmShEevrSBl2puE9Tj)
 
 ## API Reference
 
