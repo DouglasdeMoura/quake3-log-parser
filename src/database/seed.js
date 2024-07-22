@@ -1,5 +1,6 @@
 import readline from 'node:readline'
 import fs from 'node:fs'
+import { db } from './client.js'
 
 const log = fs.createReadStream('./src/database/qgames.txt')
 
@@ -13,12 +14,9 @@ let players = []
 let kills = {}
 let killsByMeans = {}
 
-// Process each line
 rl.on('line', async (line) => {
   if (line.includes('InitGame')) {
-    console.log('Game started')
-    console.log('')
-
+    // Reset all variables
     totalKills = 0
     players = []
     kills = {}
@@ -26,13 +24,16 @@ rl.on('line', async (line) => {
   }
 
   if (line.includes('ShutdownGame')) {
-    console.log('Game ended')
-
-    console.log('Total kills:', totalKills)
-    console.log('Players:', Array.from(new Set([...players])))
-    console.log('Kills:', kills)
-    console.log('Kills by means:', killsByMeans)
-    console.log('-----------------------------------')
+    // Save all data
+    const statement = db
+      .prepare('INSERT INTO games (total_kills, players, kills, kills_by_means) VALUES (?, ?, ?, ?)')
+      statement
+        .run(
+          totalKills,
+          JSON.stringify(players),
+          JSON.stringify(kills),
+          JSON.stringify(killsByMeans),
+        )
   }
 
   if (line.includes('ClientUserinfoChanged')) {
