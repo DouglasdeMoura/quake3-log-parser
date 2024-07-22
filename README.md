@@ -93,6 +93,10 @@ npm run generate-report
 
 This will process the log file located at `src/database/qgames.txt`, generate a JSON file with the statistics and print the results to the console.
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/91eexxafmShEevrSBl2puE9Tj.svg)](https://asciinema.org/a/91eexxafmShEevrSBl2puE9Tj)
+
 ## API Reference
 
 ### `GameStatistics` Class
