@@ -1,21 +1,26 @@
-export class GameStatistics {
-  constructor() {
+import readline from 'node:readline'
+import fs from 'node:fs'
+import { EventEmitter } from 'node:events'
+
+export class GameStatistics extends EventEmitter {
+  /**
+   * @param {string} logFilePath
+   */
+  constructor(logFilePath) {
+    super()
     this._games = []
     this.totalKills = 0
     this.players = []
     this.kills = {}
     this.killsByMeans = {}
+    this.logFilePath = logFilePath
 
-    this.processLine = this.processLine.bind(this)
+    this._processLine = this._processLine.bind(this)
     this._addGame = this._addGame.bind(this)
     this._resetVariables = this._resetVariables.bind(this)
   }
 
-  /**
-   * @param {string} line 
-   * @returns void
-   */
-  processLine(line) {
+  _processLine(line) {
     if (line.includes('---')) {
       return
     }
@@ -37,6 +42,7 @@ export class GameStatistics {
 
       if (!this.players.includes(player)) {
         this.players.push(player)
+        this.emit('playerAdded', player)
       }
       return
     }
@@ -55,6 +61,7 @@ export class GameStatistics {
       }
 
       this.killsByMeans[means.trim()] = (this.killsByMeans[means.trim()] || 0) + 1
+      this.emit('killAdded', `${killer} killed ${killed} by ${means}`)
       return
     }
   }
@@ -72,6 +79,7 @@ export class GameStatistics {
 
   _addGame(game) {
     this._games.push(game)
+    this.emit('gameAdded', this.games[`game_${this._games.length}`])
   }
 
   _resetVariables() {
@@ -79,5 +87,26 @@ export class GameStatistics {
     this.players = []
     this.kills = {}
     this.killsByMeans = {}
+  }
+
+  processLog() {
+    return new Promise((resolve, reject) => {
+      const logStream = fs.createReadStream(this.logFilePath)
+      const rl = readline.createInterface({
+        input: logStream,
+        crlfDelay: Infinity
+      })
+
+      rl.on('line', this._processLine)
+
+      rl.on('close', () => {
+        this.emit('processingComplete', this.games)
+        resolve(this.games)
+      })
+
+      logStream.on('error', (error) => {
+        reject(error)
+      })
+    })
   }
 }

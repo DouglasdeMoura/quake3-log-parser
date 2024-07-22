@@ -1,17 +1,27 @@
-import readline from 'node:readline'
-import fs from 'node:fs'
 import { GameStatistics } from './lib/game-statistics.js'
 
-const log = fs.createReadStream('./src/database/qgames.txt')
+const gameStats = new GameStatistics('./src/database/qgames.txt')
 
-const rl = readline.createInterface({
-  input: log,
+gameStats.on('gameAdded', (game) => {
+  console.log('New game added:', game)
 })
 
-const gameStats = new GameStatistics()
-
-rl.on('line', gameStats.processLine)
-
-rl.on('close', () => {
-  console.log(gameStats.games)
+gameStats.on('playerAdded', (player) => {
+  console.log('New player added:', player)
 })
+
+gameStats.on('killAdded', (kill) => {
+  console.log('New kill added:', kill)
+})
+
+gameStats.on('processingComplete', (games) => {
+  console.log('All games processed:', games)
+})
+
+gameStats.processLog()
+  .then((games) => {
+    console.log('Processing complete. Total games:', Object.keys(games).length)
+  })
+  .catch((error) => {
+    console.error('Error processing log:', error)
+  })
