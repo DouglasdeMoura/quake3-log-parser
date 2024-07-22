@@ -22,19 +22,19 @@ This project is a robust Quake 3 Arena log parser that processes game logs and g
 2. Clone this repository:
 
 ```
-  git clone https://github.com/douglasdemoura/quake3-log-parser.git
+git clone https://github.com/douglasdemoura/quake3-log-parser.git
 ```
 
 3. Navigate to the project directory:
 
 ```
-  cd quake3-log-parser
+cd quake3-log-parser
 ```
 
 4. Install dependencies:
 
 ```
-  npm install
+npm install
 ```
 
 ## Usage
