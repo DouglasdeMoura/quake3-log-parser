@@ -71,7 +71,7 @@ export class GameStatistics extends Readable {
     this.totalGames += 1
     const data = { [`game_${this.totalGames}`]: game }
     const gameData = JSON.stringify(data)
-    this.push(gameData + '\n')
+    this.push(gameData)
     this.emit('gameAdded', data)
   }
 
