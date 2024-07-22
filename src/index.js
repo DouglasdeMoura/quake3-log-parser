@@ -5,7 +5,6 @@ const log = fs.createReadStream('./src/database/qgames.txt')
 
 const rl = readline.createInterface({
   input: log,
-  crlfDelay: Infinity,
 })
 
 let totalKills = 0
