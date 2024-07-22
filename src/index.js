@@ -13,27 +13,35 @@ let kills = {}
 let killsByMeans = {}
 const games = []
 
-rl.on('line', async (line) => {
-  if (line.includes('InitGame')) {
-    // Reset all variables
-    totalKills = 0
-    players = []
-    kills = {}
-    killsByMeans = {}
-  }
+function resetVariables() {
+  totalKills = 0
+  players = []
+  kills = {}
+  killsByMeans = {}
+}
 
+function addGame(game) {
+  games.push(game)
+}
+
+rl.on('line', async (line) => {
   if (line.includes('ShutdownGame')) {
-    games.push({
+    addGame({
       total_kills: totalKills,
-      players: Array.from(new Set([...players])),
+      players,
       kills,
       kills_by_means: killsByMeans,
     })
+
+    resetVariables()
   }
 
   if (line.includes('ClientUserinfoChanged')) {
     const player = line.split('n\\')[1].split('\\t')[0]
-    players.push(player)
+
+    if (!players.includes(player)) {
+      players.push(player)
+    }
   }
 
   if (line.includes('Kill')) {
