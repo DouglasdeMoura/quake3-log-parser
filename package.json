@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:migrate": "node --env-file=.env src/database/migrate.js"
+    "db:migrate": "node --env-file=.env src/database/migrate.js",
+    "db:seed": "node --env-file=.env src/database/seed.js"
   },
   "keywords": [],
   "author": "Douglas Moura <douglas.ademoura@gmail.com>",
