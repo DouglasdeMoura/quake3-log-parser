@@ -1,4 +1,4 @@
-import { test } from 'node:test'
+import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -519,22 +519,24 @@ function processLogAndCollectResults(gameStats) {
   })
 }
 
-test('return game statistics from logfile', async () => {
-  const gameStats = new GameStatistics(pathToLogFile)
-  const games = await processLogAndCollectResults(gameStats)
+describe('GameStatistics', () => {
+  it('should return game statistics from logfile', async () => {
+    const gameStats = new GameStatistics(pathToLogFile)
+    const games = await processLogAndCollectResults(gameStats)
 
-  assert.deepEqual(games, fixture)
-})
+    assert.deepEqual(games, fixture)
+  })
 
-test('sum of kills on kill by means', async () => {
-  const gameStats = new GameStatistics(pathToLogFile)
-  const games = await processLogAndCollectResults(gameStats)
+  it('should sum of kills on kill by means', async () => {
+    const gameStats = new GameStatistics(pathToLogFile)
+    const games = await processLogAndCollectResults(gameStats)
 
-  const totalKillsByMeans = games.reduce((acc, game) => {
-    const { kills_by_means, total_kills } = Object.values(game)[0]
-    const sum = Object.values(kills_by_means).reduce((acc, value) => acc + value, 0)
-    return acc + sum - total_kills
-  }, 0)
+    const totalKillsByMeans = games.reduce((acc, game) => {
+      const { kills_by_means, total_kills } = Object.values(game)[0]
+      const sum = Object.values(kills_by_means).reduce((acc, value) => acc + value, 0)
+      return acc + sum - total_kills
+    }, 0)
 
-  assert.equal(totalKillsByMeans, 0)
+    assert.equal(totalKillsByMeans, 0)
+  })
 })
