@@ -42,34 +42,35 @@ This project is a robust Quake 3 Arena log parser that processes game logs and g
 ### As a Module
 
 ```javascript
-import { GameStatistics } from './lib/game-statistics.js'
-import fs from 'node:fs'
+import { GameStatistics } from "./lib/game-statistics.js";
+import fs from "node:fs";
 
-const gameStats = new GameStatistics('./src/database/qgames.txt')
+const gameStats = new GameStatistics("./src/database/qgames.txt");
 
-const outputStream = fs.createWriteStream('./output.json')
+const outputStream = fs.createWriteStream("./output.json");
 
-let isFirstGame = true
+let isFirstGame = true;
 
-gameStats.processLog()
-  .on('data', (chunk) => {
+gameStats
+  .processLog()
+  .on("data", (chunk) => {
     if (!isFirstGame) {
-      outputStream.write(',\n')
+      outputStream.write(",\n");
     } else {
-      outputStream.write('[\n')
-      isFirstGame = false
+      outputStream.write("[\n");
+      isFirstGame = false;
     }
-    outputStream.write(chunk)
+    outputStream.write(chunk);
   })
-  .on('end', () => {
+  .on("end", () => {
     // Write the closing bracket of the JSON array
-    outputStream.write('\n]')
-    outputStream.end()
-    console.log('Processing complete. Results written to output.json')
+    outputStream.write("\n]");
+    outputStream.end();
+    console.log("Processing complete. Results written to output.json");
   })
-  .on('error', (error) => {
-    console.error('Error processing log:', error)
-  })
+  .on("error", (error) => {
+    console.error("Error processing log:", error);
+  });
 ```
 
 The result will be written to `output.json` file.
@@ -81,6 +82,16 @@ Run the comprehensive test suite with:
 ```
 npm test
 ```
+
+## Generating reports
+
+To generate a report, run the following command:
+
+```
+npm run generate-report
+```
+
+This will process the log file located at `src/database/qgames.txt`, generate a JSON file with the statistics and print the results to the console.
 
 ## API Reference
 
