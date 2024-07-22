@@ -8,7 +8,7 @@ export class GameStatistics extends Readable {
    */
   constructor(logFilePath) {
     super()
-    this._games = []
+    this.totalGames = 0
     this.totalKills = 0
     this.players = []
     this.kills = {}
@@ -67,22 +67,12 @@ export class GameStatistics extends Readable {
     }
   }
 
-  get games() {
-    const data = {}
-
-    this._games.forEach((game, index) => {
-      const id = `game_${index + 1}`
-      data[id] = game
-    })
-
-    return data
-  }
-
   _addGame(game) {
-    this._games.push(game)
-    const gameData = JSON.stringify({ [`game_${this._games.length}`]: game }, null, 2)
+    this.totalGames += 1
+    const data = { [`game_${this.totalGames}`]: game }
+    const gameData = JSON.stringify(data)
     this.push(gameData + '\n')
-    this.emit('gameAdded', this.games[`game_${this._games.length}`])
+    this.emit('gameAdded', data)
   }
 
   _resetVariables() {
