@@ -10,5 +10,8 @@
   "keywords": [],
   "author": "Douglas Moura <douglas.ademoura@gmail.com>",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.14.11"
+  }
 }
