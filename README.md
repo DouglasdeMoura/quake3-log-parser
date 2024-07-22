@@ -18,7 +18,7 @@ This project is a robust Quake 3 Arena log parser that processes game logs and g
 
 ## Installation
 
-1. Ensure you have Node.jsinstalled on your system.
+1. Ensure you have Node.js installed on your system.
 2. Clone this repository:
 
 ```
